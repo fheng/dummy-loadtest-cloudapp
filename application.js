@@ -1,3 +1,4 @@
+var fhComponentMetrics = require('fh-component-metrics');
 var mbaasApi = require('fh-mbaas-api');
 var express = require('express');
 var mbaasExpress = mbaasApi.mbaasExpress();
@@ -11,6 +12,27 @@ var securableEndpoints = [
 ];
 
 var app = express();
+
+
+// Enable METRICS
+var metricsConf = {
+	enabled: true,
+	host: process.env.FH_METRICS_HOST || '209.132.178.93',
+	port: process.env.FH_METRICS_PORT || 2003
+};
+var metricsTitle = 'dummy-loadtest-cloadapp';
+var metrics = fhComponentMetrics(metricsConf);
+if (metricsConf.enabled) {
+    metrics.memory(metricsTitle, { interval: 2000 }, function(err) {
+        if (err) console.warn(err);
+    });
+    metrics.cpu(metricsTitle, { interval: 1000 }, function(err) {
+        if (err) console.warn(err);
+    });
+    // TODO ??? TypeError: Object #<Route> has no method 'replace'
+    // app.use(fhComponentMetrics.timingMiddleware(metricsTitle, metricsConf));
+}
+
 
 // Enable CORS for all requests
 app.use(cors());
