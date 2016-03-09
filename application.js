@@ -29,8 +29,7 @@ if (metricsConf.enabled) {
     metrics.cpu(metricsTitle, { interval: 1000 }, function(err) {
         if (err) console.warn(err);
     });
-    // TODO ??? TypeError: Object #<Route> has no method 'replace'
-    // app.use(fhComponentMetrics.timingMiddleware(metricsTitle, metricsConf));
+    app.use(fhComponentMetrics.timingMiddleware(metricsTitle, metricsConf));
 }
 
 
