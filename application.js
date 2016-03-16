@@ -20,7 +20,7 @@ var metricsConf = {
 	host: process.env.FH_METRICS_HOST || '209.132.178.93',
 	port: process.env.FH_METRICS_PORT || 2003
 };
-var metricsTitle = 'dummy-loadtest-cloadapp';
+var metricsTitle = 'dummy-loadtest-cloadapp-run1';
 var metrics = fhComponentMetrics(metricsConf);
 if (metricsConf.enabled) {
     metrics.memory(metricsTitle, { interval: 2000 }, function(err) {
