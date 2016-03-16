@@ -46,6 +46,7 @@ app.use(express.static(__dirname + '/public'));
 // Note: important that this is added just before your own Routes
 app.use(mbaasExpress.fhmiddleware());
 
+app.use('/hello', require('./lib/hello.js')());
 app.use('/fhdb', require('./lib/fhdb.js')());
 app.use('/fhcache', require('./lib/fhcache.js')());
 app.use('/fhstats', require('./lib/fhstats.js')());
